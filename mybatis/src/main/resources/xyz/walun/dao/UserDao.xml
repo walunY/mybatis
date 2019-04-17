@@ -6,4 +6,7 @@
     <select id="findAll" resultType="xyz.walun.domain.User">
         SELECT * FROM user;
     </select>
+    <insert id="saveUser" parameterType="xyz.walun.domain.User">
+        INSERT INTO user(username,address,sex,birthday) VALUES (#{username},#{address},#{sex},#{birthday});
+    </insert>
 </mapper>

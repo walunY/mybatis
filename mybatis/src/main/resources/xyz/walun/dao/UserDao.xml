@@ -8,5 +8,26 @@
     </select>
     <insert id="saveUser" parameterType="xyz.walun.domain.User">
         INSERT INTO user(username,address,sex,birthday) VALUES (#{username},#{address},#{sex},#{birthday});
+       <!-- 配置插入操作后，获取插入数据的id -->
+        <!--       数据库所在的列     bean对象的属性    返回的类型       什么时候执行        -->
+        <selectKey keyColumn="id" keyProperty="id" resultType="Int" order="AFTER">
+            SELECT last_insert_id();
+        </selectKey>
     </insert>
+    <update id="updateUser" parameterType="xyz.walun.domain.User">
+        UPDATE user set username=#{username},address=#{address},sex=#{sex} WHERE id=#{id};
+    </update>
+    <delete id="deleteUser" parameterType="Integer">
+        DELETE from user where id = #{uid}
+    </delete>
+    <select id="findById" parameterType="Int" resultType="xyz.walun.domain.User">
+        SELECT * from user WHERE id =#{uid};
+    </select>
+    <select id="findByName" parameterType="String" resultType="xyz.walun.domain.User">
+        SELECT * from user where username like #{uname}
+        <!-- SELECT * from user where username like '${value}'第二种方式-->
+    </select>
+    <select id="findTotal" resultType="Int">
+        SELECT COUNT(id) from user;
+    </select>
 </mapper>

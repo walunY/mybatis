@@ -12,4 +12,18 @@ public interface UserDao {
 	 * @param user
 	 */
 	void saveUser(User user);
+
+	/**
+	 * 更新用户操作
+	 * @param user
+	 */
+	void updateUser(User user);
+
+	void deleteUser(Integer userId);
+
+	User findById(Integer userId);
+
+	List<User> findByName(String name);
+
+	int findTotal();
 }

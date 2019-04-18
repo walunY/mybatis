@@ -53,12 +53,46 @@ public class Test {
 	@org.junit.Test
 	public void testSave(){
 		User user = new User();
-		user.setUsername("saveTest");
+		user.setUsername("saveTest and get id");
 		user.setAddress("四川成都");
 		user.setBirthday(new Date());
 		user.setSex("男");
+		System.out.println("保存前- -  -- - - "+user);
 		userDao.saveUser(user);
+		System.out.println("保存后- -  -- - - "+user);
 
+	}
 
+	@org.junit.Test
+	public void testUpdateUser(){
+		User user = new User();
+		user.setId(51);
+		user.setSex("女");
+		user.setUsername("更新名称");
+		user.setAddress("更新地址");
+
+		userDao.updateUser(user);
+	}
+
+	@org.junit.Test
+	public void testDeleteUser(){
+		userDao.deleteUser(51);
+	}
+	@org.junit.Test
+	public void testFindById(){
+		User user = userDao.findById(42);
+		System.out.println(user);
+	}
+
+	@org.junit.Test
+	public void testFindByName(){
+		List<User> users = userDao.findByName("%王%");
+		for(User u : users)
+			System.out.println(u);
+	}
+	@org.junit.Test
+	public void testFindTotal(){
+		int i = userDao.findTotal();
+		System.out.println(i);
 	}
 }

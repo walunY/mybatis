@@ -1,5 +1,6 @@
 package xyz.walun.dao;
 
+import xyz.walun.domain.QueryVo;
 import xyz.walun.domain.User;
 
 import java.util.List;
@@ -26,4 +27,10 @@ public interface UserDao {
 	List<User> findByName(String name);
 
 	int findTotal();
+	/**
+	 * 根据queryVo中的条件查询用户
+	 * @param vo
+	 * @return
+	 */
+	List<User> findUserByVo(QueryVo vo);
 }

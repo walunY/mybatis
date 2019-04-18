@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import xyz.walun.dao.UserDao;
+import xyz.walun.domain.QueryVo;
 import xyz.walun.domain.User;
 
 import java.io.IOException;
@@ -53,10 +54,10 @@ public class Test {
 	@org.junit.Test
 	public void testSave(){
 		User user = new User();
-		user.setUsername("saveTest and get id");
-		user.setAddress("四川成都");
-		user.setBirthday(new Date());
-		user.setSex("男");
+		user.setUserName("saveTest and get id");
+		user.setUserAddress("四川成都");
+		user.setUserBirthday(new Date());
+		user.setUserSex("男");
 		System.out.println("保存前- -  -- - - "+user);
 		userDao.saveUser(user);
 		System.out.println("保存后- -  -- - - "+user);
@@ -66,10 +67,10 @@ public class Test {
 	@org.junit.Test
 	public void testUpdateUser(){
 		User user = new User();
-		user.setId(51);
-		user.setSex("女");
-		user.setUsername("更新名称");
-		user.setAddress("更新地址");
+		user.setUserId(51);
+		user.setUserSex("女");
+		user.setUserName("更新名称");
+		user.setUserAddress("更新地址");
 
 		userDao.updateUser(user);
 	}
@@ -94,5 +95,16 @@ public class Test {
 	public void testFindTotal(){
 		int i = userDao.findTotal();
 		System.out.println(i);
+	}
+
+	@org.junit.Test
+	public void testFindByVo(){
+		QueryVo vo = new QueryVo();
+		User u = new User();
+		u.setUserName("%王%");
+		vo.setUser(u);
+		List<User> users = userDao.findUserByVo(vo);
+		for(User us : users)
+			System.out.println(us);
 	}
 }

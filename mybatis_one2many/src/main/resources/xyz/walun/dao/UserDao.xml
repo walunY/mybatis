@@ -3,11 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="xyz.walun.dao.UserDao">
+    <resultMap id="UserAndAccount" type="xyz.walun.domain.User">
+        <id property="userId" column="id"/>
+        <result property="userAddress" column="address"/>
+        <result property="userSex" column="sex"/>
+        <result property="userName" column="username"/>
+        <result property="userBirthday" column="birthday"/>
+        <collection property="accounts" ofType="xyz.walun.domain.Account">
+            <id property="id" column="aid"/>
+            <result property="uid" column="uid"/>
+            <result property="money" column="money"/>
+        </collection>
+    </resultMap>
     <sql id="sa">
         select * from user
     </sql>
-    <select id="findAll" resultType="xyz.walun.domain.User">
-        <include refid="sa"/>
+    <select id="findAll" resultMap="UserAndAccount">
+        SELECT u.*,a.`ID` aid,a.`UID`,a.`MONEY` FROM USER u LEFT OUTER JOIN account a ON u.`id`=a.`UID`;
     </select>
     <select id="findById" parameterType="Integer" resultType="xyz.walun.domain.User">
         <include refid="sa"/>where id = #{id}

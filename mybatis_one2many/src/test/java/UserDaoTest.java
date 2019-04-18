@@ -26,6 +26,23 @@ public class UserDaoTest {
         sqlSession.close();
         in.close();
     }
+
+    @org.junit.Test
+    public void testFindAllandAccount() throws IOException {
+        InputStream in= Resources.getResourceAsStream("SqlMapConfig.xml");
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory factory = builder.build(in);
+        SqlSession sqlSession = factory.openSession();
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        List<User> list = userDao.findAll();
+        for(User u : list) {
+            System.out.println("===============");
+            System.out.println(u.getAccounts());
+            System.out.println(u);
+        }
+        sqlSession.close();
+        in.close();
+    }
     @org.junit.Test
     public void testFindByID() throws IOException {
         InputStream in= Resources.getResourceAsStream("SqlMapConfig.xml");

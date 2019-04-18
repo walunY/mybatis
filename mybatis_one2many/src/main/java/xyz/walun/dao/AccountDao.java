@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AccountDao {
     /**
-     * 查询所有的账户信息
+     * 查询所有的账户信息,以及用户信息 一对一 一个账户对应一个用户
      * @return
      */
     List<Account> findAll();

@@ -19,8 +19,11 @@ public class AccountDaoTest {
 		SqlSession sqlSession = factory.openSession();
 		AccountDao dao = sqlSession.getMapper(AccountDao.class);
 		List<Account> list = dao.findAll();
-		for(Account a: list)
+		for (Account a : list){
+			System.out.println("============");
 			System.out.println(a);
+			System.out.println(a.getUser());
+		}
 		sqlSession.close();
 		in.close();
 	}

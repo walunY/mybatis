@@ -41,6 +41,28 @@
     <select id="findUserByVo" resultMap="userMap" parameterType="xyz.walun.domain.QueryVo">
         SELECT * from user where username like #{user.userName};
     </select>
+
+    <select id="findUserByCondition" parameterType="xyz.walun.domain.User" resultMap="userMap">
+        SELECT * FROM user
+        <where>
+            <if test="userName !=null">
+                and username =#{userName}
+            </if>
+            <if test="userSex != null">
+                and sex = #{userSex}
+            </if>
+        </where>
+    </select>
+    <select id="findUserByids" parameterType="xyz.walun.domain.QueryVo" resultMap="userMap">
+        SELECT * from user
+        <where>
+            <if test="ids != null and ids.size()>0">
+            <foreach collection="ids" open="and id in (" close=")" item="uid" separator=",">
+                #{uid}
+            </foreach>
+            </if>
+        </where>
+    </select>
     <!-- 数据库列名和实体类名相同！不需要特殊映射 -->
  <!--   <select id="findAll" resultType="xyz.walun.domain.User">
         SELECT * FROM user;

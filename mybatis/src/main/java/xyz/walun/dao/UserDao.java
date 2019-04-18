@@ -33,4 +33,8 @@ public interface UserDao {
 	 * @return
 	 */
 	List<User> findUserByVo(QueryVo vo);
+
+	List<User> findUserByCondition(User user);
+
+	List<User> findUserByids(QueryVo vo);
 }

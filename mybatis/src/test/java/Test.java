@@ -10,6 +10,7 @@ import xyz.walun.domain.User;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -104,6 +105,30 @@ public class Test {
 		u.setUserName("%王%");
 		vo.setUser(u);
 		List<User> users = userDao.findUserByVo(vo);
+		for(User us : users)
+			System.out.println(us);
+	}
+
+	@org.junit.Test
+	public void testfindUserByCondition(){
+		User user = new User();
+		user.setUserName("小马宝莉");
+		user.setUserSex("女");
+
+		List<User> list = userDao.findUserByCondition(user);
+		for(User u : list)
+			System.out.println(u);
+	}
+
+	@org.junit.Test
+	public void testfindUserByids(){
+		QueryVo vo = new QueryVo();
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(41);
+		list.add(42);
+		list.add(43);
+		vo.setIds(list);
+		List<User> users = userDao.findUserByids(vo);
 		for(User us : users)
 			System.out.println(us);
 	}

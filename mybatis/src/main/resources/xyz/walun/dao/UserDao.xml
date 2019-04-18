@@ -53,8 +53,12 @@
             </if>
         </where>
     </select>
-    <select id="findUserByids" parameterType="xyz.walun.domain.QueryVo" resultMap="userMap">
+    <sql id="userSql">
         SELECT * from user
+    </sql>
+    <select id="findUserByids" parameterType="xyz.walun.domain.QueryVo" resultMap="userMap">
+        <!-- 复用sql语句 -->
+        <include refid="userSql"/>
         <where>
             <if test="ids != null and ids.size()>0">
             <foreach collection="ids" open="and id in (" close=")" item="uid" separator=",">

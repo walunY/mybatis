@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="xyz.walun.dao.UserDao">
+    <!--  开启支持二级缓存   -->
+    <cache/>
+
+    <resultMap id="userMap" type="user">
+        <id property="userId" column="id"/>
+        <result property="userAddress" column="address"/>
+        <result property="userSex" column="sex"/>
+        <result property="userName" column="username"/>
+        <result property="userBirthday" column="birthday"/>
+    </resultMap>
+    <sql id="sa">
+        select * from user
+    </sql>
+    <select id="findAll" resultMap="userMap">
+        <include refid="sa"/>
+    </select>
+    <select id="findById" parameterType="Integer" resultMap="userMap" useCache="true">
+        <include refid="sa"/>where id = #{id}
+    </select>
+</mapper>

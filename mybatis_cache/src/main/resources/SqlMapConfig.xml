@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 配置properties-->
+    <properties resource="jdbcConfig.properties"></properties>
+    <settings>
+        <!-- 开启支持二级缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!--使用typeAliases配置别名，它只能配置domain中类的别名 -->
+    <typeAliases>
+        <package name="xyz.walun.domain"></package>
+    </typeAliases>
+    <environments default="mysql">
+        <environment id="mysql">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"></property>
+                <property name="url" value="${jdbc.url}"></property>
+                <property name="username" value="${jdbc.username}"></property>
+                <property name="password" value="${jdbc.password}"></property>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--<mapper resource="xyz/walun/dao/UserDao.xml"/>
+        <mapper resource="xyz/walun/dao/AccountDao.xml"/>-->
+        <!-- 使用package就可以把所有dao对应的xml导入 -->
+        <package name="xyz.walun.dao"></package>
+    </mappers>
+
+</configuration>

@@ -3,16 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <settings>
-        <setting name="lazyLoadingEnabled" value="true"/>
-        <setting name="aggressiveLazyLoading" value="false"/>
-    </settings>
     <environments default="mysql">
         <environment id="mysql">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/eesy_mybatis?useSSL=false"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/eesy_mybatis"/>
                 <property name="username" value="root"/>
                 <property name="password" value="aq34967"/>
             </dataSource>
@@ -20,7 +16,5 @@
     </environments>
     <mappers>
         <mapper resource="xyz/walun/dao/UserDao.xml"/>
-        <mapper resource="xyz/walun/dao/AccountDao.xml"/>
     </mappers>
-
 </configuration>
